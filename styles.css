@@ -15,3 +15,118 @@
 .concept-step img{width:100%;height:auto;object-fit:contain}
 .course-card img{image-rendering:auto}
 @media(max-width:900px){.drawing-head{grid-template-columns:1fr}.image-note{margin-top:-45px}}
+/* CARROSSEL - CONCEPÇÃO RESIDÊNCIA THABORA */
+
+.concept-carousel {
+  position: relative;
+  width: 100%;
+  max-width: 1400px;
+  margin: 45px auto 0;
+}
+
+.concept-slides {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: #f3f1ed;
+}
+
+.concept-slide {
+  display: none;
+  width: 100%;
+  text-decoration: none;
+}
+
+.concept-slide.active {
+  display: block;
+  animation: conceptFade 0.8s ease;
+}
+
+.concept-slide img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+@keyframes conceptFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.concept-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+
+  width: 50px;
+  height: 50px;
+
+  border: 1px solid rgba(0,0,0,.25);
+  background: rgba(255,255,255,.85);
+
+  font-size: 22px;
+  cursor: pointer;
+
+  transition: all .3s ease;
+}
+
+.concept-arrow:hover {
+  background: #111;
+  color: #fff;
+}
+
+.concept-prev {
+  left: 20px;
+}
+
+.concept-next {
+  right: 20px;
+}
+
+.concept-dots {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 22px;
+}
+
+.concept-dots button {
+  border: 0;
+  background: transparent;
+  color: #999;
+  font-size: 11px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  padding: 6px;
+}
+
+.concept-dots button.active {
+  color: #111;
+  border-bottom: 1px solid #111;
+}
+
+@media (max-width: 768px) {
+
+  .concept-arrow {
+    width: 38px;
+    height: 38px;
+  }
+
+  .concept-prev {
+    left: 8px;
+  }
+
+  .concept-next {
+    right: 8px;
+  }
+
+  .concept-dots {
+    gap: 8px;
+  }
+}
