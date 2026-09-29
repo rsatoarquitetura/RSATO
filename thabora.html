@@ -61,5 +61,66 @@
 </section>
 
 <script src="script.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const slides = document.querySelectorAll(".concept-slide");
+  const dots = document.querySelectorAll(".concept-dots button");
+  const prev = document.querySelector(".concept-prev");
+  const next = document.querySelector(".concept-next");
+
+  if (!slides.length) return;
+
+  let atual = 0;
+
+  function mostrarSlide(numero) {
+
+    slides.forEach(function(slide) {
+      slide.classList.remove("active");
+    });
+
+    dots.forEach(function(dot) {
+      dot.classList.remove("active");
+    });
+
+    atual = (numero + slides.length) % slides.length;
+
+    slides[atual].classList.add("active");
+
+    if (dots[atual]) {
+      dots[atual].classList.add("active");
+    }
+  }
+
+  function proximo() {
+    mostrarSlide(atual + 1);
+  }
+
+  function anterior() {
+    mostrarSlide(atual - 1);
+  }
+
+  if (next) {
+    next.addEventListener("click", proximo);
+  }
+
+  if (prev) {
+    prev.addEventListener("click", anterior);
+  }
+
+  dots.forEach(function(dot, indice) {
+    dot.addEventListener("click", function() {
+      mostrarSlide(indice);
+    });
+  });
+
+  mostrarSlide(0);
+
+  setInterval(proximo, 3000);
+
+});
+</script>
+
 </body>
 </html>
