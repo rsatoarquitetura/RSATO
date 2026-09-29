@@ -60,66 +60,71 @@
 
 </section>
 
+<nav class="project-nav">
+  <a href="morinda.html">← Residência Morinda</a>
+  <a href="oniode.html">Hostel Oniodê →</a>
+</nav>
+
 <script src="script.js"></script>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
+(function () {
+    let atual = 0;
 
-  const slides = document.querySelectorAll(".concept-slide");
-  const dots = document.querySelectorAll(".concept-dots button");
-  const prev = document.querySelector(".concept-prev");
-  const next = document.querySelector(".concept-next");
+    const slides = document.querySelectorAll('.concept-slide');
+    const botoes = document.querySelectorAll('.concept-dots button');
+    const anterior = document.querySelector('.concept-prev');
+    const proximo = document.querySelector('.concept-next');
 
-  if (!slides.length) return;
+    if (slides.length === 0) return;
 
-  let atual = 0;
+    function trocarSlide(numero) {
+        slides[atual].classList.remove('active');
 
-  function mostrarSlide(numero) {
+        if (botoes[atual]) {
+            botoes[atual].classList.remove('active');
+        }
 
-    slides.forEach(function(slide) {
-      slide.classList.remove("active");
-    });
+        atual = numero;
 
-    dots.forEach(function(dot) {
-      dot.classList.remove("active");
-    });
+        if (atual >= slides.length) {
+            atual = 0;
+        }
 
-    atual = (numero + slides.length) % slides.length;
+        if (atual < 0) {
+            atual = slides.length - 1;
+        }
 
-    slides[atual].classList.add("active");
+        slides[atual].classList.add('active');
 
-    if (dots[atual]) {
-      dots[atual].classList.add("active");
+        if (botoes[atual]) {
+            botoes[atual].classList.add('active');
+        }
     }
-  }
 
-  function proximo() {
-    mostrarSlide(atual + 1);
-  }
+    if (proximo) {
+        proximo.onclick = function () {
+            trocarSlide(atual + 1);
+        };
+    }
 
-  function anterior() {
-    mostrarSlide(atual - 1);
-  }
+    if (anterior) {
+        anterior.onclick = function () {
+            trocarSlide(atual - 1);
+        };
+    }
 
-  if (next) {
-    next.addEventListener("click", proximo);
-  }
-
-  if (prev) {
-    prev.addEventListener("click", anterior);
-  }
-
-  dots.forEach(function(dot, indice) {
-    dot.addEventListener("click", function() {
-      mostrarSlide(indice);
+    botoes.forEach(function (botao, indice) {
+        botao.onclick = function () {
+            trocarSlide(indice);
+        };
     });
-  });
 
-  mostrarSlide(0);
+    setInterval(function () {
+        trocarSlide(atual + 1);
+    }, 3000);
 
-  setInterval(proximo, 3000);
-
-});
+})();
 </script>
 
 </body>
